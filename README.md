@@ -22,12 +22,6 @@ Fast React Pizza is a simple and stylish web app built using React to manage piz
 
 ---
 
-## 🎨 Demo
-
-[Live Demo](#) (Add a link to the deployed version if available)
-
----
-
 ## 📦 Installation
 
 Follow these steps to get the project up and running on your local machine:
