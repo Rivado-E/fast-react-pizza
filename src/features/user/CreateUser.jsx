@@ -4,20 +4,16 @@ import { useDispatch } from 'react-redux';
 import { updateName } from './userSlice';
 import { useNavigate } from 'react-router-dom';
 
-// TODO: Use useDispatch to get the dispatch function.
-// Dispatch the updateName action with the username when the form is submitted.
-
 function CreateUser() {
   const [username, setUsername] = useState('');
-
-  //TODO: Use useDispatch to get the dispatch function
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   function handleSubmit(e) {
     e.preventDefault();
 
     if (!username) return;
-    // TODO: Dispatch the username action with the username here
+    dispatch(updateName(username));
     navigate('/menu');
   }
 

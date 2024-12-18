@@ -12,8 +12,10 @@ function UpdateOrder({ order }) {
   );
 }
 
-export default UpdateOrder;
+export async function action({ params }) {
+  const data = { priority: true };
+  await updateOrder(params.orderId, data);
+  return null;
+} 
 
-// TODO: IMPLEMENT THE ACTION FUNCTION TO HANDLE THE FORM SUBMISSION.
-// USE THE updateOrder SERVICE TO UPDATE THE ORDER'S PRIORITY STATUS.
-// ENSURE YOU HANDLE THE REQUEST AND EXTRACT NECESSARY DATA.
+export default UpdateOrder;

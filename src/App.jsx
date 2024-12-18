@@ -12,8 +12,39 @@ import { action as updateOrderAction } from './features/order/UpdateOrder';
 
 import AppLayout from './ui/AppLayout';
 
+const router = createBrowserRouter([
+  {
+    element: <AppLayout />,
+    errorElement: <Error />,
+    children: [
+      {
+        path: '/',
+        element: <Home />,
+      },
+      {
+        path: '/menu',
+        element: <Menu />,
+        loader: menuLoader,
+      },
+      {
+        path: '/cart',
+        element: <Cart />,
+      },
+      {
+        path: '/order/new',
+        element: <CreateOrder />,
+        action: createOrderAction,
+      },
+      {
+        path: '/order/:orderId',
+        element: <Order />,
+        loader: orderLoader,
+        action: updateOrderAction,
+      },
+    ],
+  },
 
-const router = // TODO: CREATE THE ROUTER USING BROWSER ROUTER FOR THE Home, Menu, Cart, CreateOrder, and Order routes
+]);
 
 function App() {
   return <RouterProvider router={router} />;

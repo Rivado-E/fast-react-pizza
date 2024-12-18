@@ -1,9 +1,8 @@
+import { useLoaderData } from 'react-router-dom';
 import { getMenu } from '../../services/apiRestaurant';
 import MenuItem from './MenuItem';
 
 function Menu() {
-  // TODO: COMPLETE THE MENU COMPONENT THAT USES useLoaderData() AND renders an unordered list (<ul>)
-  // where each pizza item in the menu array is passed as a prop to the MenuItem component.
   const menu = useLoaderData();
 
   return (
@@ -15,7 +14,9 @@ function Menu() {
   );
 }
 
-// TODO: COMPLETE THE LOADER FUNCTION THAT FETCHES DATA BY CALLING getMenu FROM apiRestaurant
-export async function loader() {}
+export async function loader() {
+  const menu = await getMenu();
+  return menu;
+}
 
 export default Menu;

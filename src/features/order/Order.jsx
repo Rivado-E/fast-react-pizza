@@ -1,23 +1,24 @@
 import { useFetcher, useLoaderData } from 'react-router-dom';
-
+import { useEffect } from 'react';
 import OrderItem from './OrderItem';
-
 import { getOrder } from '../../services/apiRestaurant';
 import {
   calcMinutesLeft,
   formatCurrency,
   formatDate,
 } from '../../utils/helpers';
-import { useEffect } from 'react';
 import UpdateOrder from './UpdateOrder';
 
 function Order() {
   const order = useLoaderData();
   const fetcher = useFetcher();
 
-  // TODO: USE THE useFetcher HOOK TO LOAD THE MENU DATA WHEN THE COMPONENT MOUNTS.
-  // PASS THE INGREDIENTS OF EACH PIZZA TO THE ORDERITEM COMPONENTS.
-  // MAKE SURE TO HANDLE THE LOADING STATE WHILE THE DATA IS BEING FETCHED.
+  useEffect(function() {
+    if (!fetcher.data && fetcher.state === 'idle') {
+      fetcher.load('/menu');
+    }
+  }, [fetcher]);
+
   const {
     id,
     status,
@@ -27,14 +28,13 @@ function Order() {
     estimatedDelivery,
     cart,
   } = order;
-
+  
   const deliveryIn = calcMinutesLeft(estimatedDelivery);
 
   return (
     <div className="space-y-8 px-4 py-6">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <h2 className="text-xl font-semibold">Order #{id} status</h2>
-
         <div className="space-x-2">
           {priority && (
             <span className="rounded-full bg-red-500 px-3 py-1 text-sm font-semibold uppercase tracking-wide text-red-50">
